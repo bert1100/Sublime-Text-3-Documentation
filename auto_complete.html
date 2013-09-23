@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>自动完成 - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">目录</a></p>
+<h1>自动完成</h1>
+
+<h3>概述</h3>
+
+<p>自动完成会根据你的输入显示补全列表，所以你可以通过输入简短的字母来完成填入长的单词。 默认编辑源代码和HTML(输入&lt;字符之后启动提示)时是开启的。
+
+<h2>禁用自动完成</h2>
+
+<p>自动完成可以通过<tt>auto_complete</tt>来配置。把下面这行加入到<tt>Preferences/File Settings - User</tt>里面可以禁用:
+
+<pre class="code">
+"auto_complete": false
+</pre>
+
+<p>如果自动完成被禁用，补全列表弹出层可以手动触发，或者通过tab键来完成输入最接近的自动补全匹配，而不显示补全列表提示。
+
+<h2>手动显示补全列表</h2>
+
+<p>如果未显示可以通过 <tt>Ctrl+Space</tt> 显示提示列表。如果已经显示，可以选择下一项。
+
+<h2>通过Tab键完成</h2>
+
+<p>默认情况下，补全提示列表中选中的项会在回车之后自动填入。这个可能会导致歧义，是需要换行还是自动完成补全。通过设置<tt>auto_complete_commit_on_tab</tt> 为true, 回车将会插入新行，tab键将自动完成补全。这样做的另一个好处就是：让Sublime Text知道没有模糊的定义， 它会把你可能想要的最为匹配的项展现在第一个位置。
+
+<p>建议启用Tab键完成自动补全，不过可能需要一点时间适应这个习惯。</p>
+
+</body>
+</html>

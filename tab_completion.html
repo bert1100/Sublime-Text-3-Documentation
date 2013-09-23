@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>Tab完成 - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">目录</a></p>
+<h1>Tab完成</h1>
+<h3>概述</h3>
+
+<p>Tab完成可以通过Tab键快速完成单词的输入。启用时，按tab键将会把光标左边文本扩展为最为匹配的词，使用了Sublime Text的模糊匹配算法。
+
+<p>默认情况下Tab完成是启用的。
+
+
+<h2>禁用Tab完成</h2>
+
+<p>有些时候Tab完成并不令人满意。把下面这行配置添加到<tt>Preferences/File Settings - User</tt>可以禁用它:
+
+<pre class="code">
+"tab_completion": false
+</pre>
+
+<h2>插入Tab字符</h2>
+
+<p>插入Tab字符而不是触发自动补全，可以使用<tt>shift+tab</tt>.
+
+<h2>更换补全内容</h2>
+
+<p>有些时候自动补全的文本并不是我们想要的，可以通过<tt>ctrl+space</tt>来更换候选词，这样就会回退补全的内容，并显示标准的自动完成列表。
+
+<p>另外，可以再次按tab键轮询下一个补全内容
+
+<h2>自动完成的来源</h2>
+
+<p>自动完成的信息来源，或者要创建自己的自动完成信息可以参考<a href="http://sublimetext.info/docs/en/extensibility/completions.html">sublimetext.info</a>.
+
+
+</body>
+</html>
