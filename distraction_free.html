@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>免注意力分散模式 - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">目录</a></p>
+<h1>免注意力分散模式</h1>
+
+<h3>概述</h3>
+
+<p>换句话说就是注意力集中模式，这种模式下代码编辑区域将变成全屏。所有UI部件都会被影藏，但是仍然可以访问。可以通过<span class="menu">View/Enter Distraction Free Mode</span> 菜单进入此模式。
+
+<p>这种模式下，所有UI部件(侧边栏，预览地图，状态栏等等)将影藏。可以通过View菜单里选择性的显示某个部分，这些配置同样将会在下一次进入该模式时有效。
+
+<h2>定制</h2>
+
+<p>该模式下可以应用某些配置。默认配置(在<span class="file">Packages/Default/Distraction Free.sublime-settings</span>):
+
+<pre class="code">
+{
+    "line_numbers": false,
+    "gutter": false,
+    "draw_centered": true,
+    "wrap_width": 80,
+    "word_wrap": true,
+    "scroll_past_end": true
+}
+</pre>
+
+<p>可以通过编辑<span class="file">Packages/User/Distraction Free.sublime-settings</span>文件来自定义这些配置，可通过<span class="menu">Preferences/File Settings - More</span>菜单访问到。
+
+<p>上面<span class="setting">wrap_width</span>设置没太大意义。80表示代码编辑区域边界位置在第80个字符位置。你可以设置成更大的值，或者设置为0表示整个窗口的宽度。
+
+</body>
+</html>
