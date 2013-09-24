@@ -50,19 +50,19 @@ Vintage默认是禁用的， 通过<span class="setting">ignored_packages</span>
 
 <p>同时也包含许多移动操作，包括l, h, j, k, W, w, e, E, b, B, alt+w (move by sub-words), alt+W (move backwards by sub-words), $, ^, %, 0, G, gg, f, F, t, T, ^f, ^b, H, M, and L.
 
-<p>Text objects are supported, including words, quotes, brackets and tags.
+<p>文本对象的支持，包括词，引号，括号和标签。
 
-<p>Repeat ('.') is in there, as is specifying counts for commands and motions. Registers are supported, as are macros and bookmarks. Many other miscellaneous commands are supported too, such and *, /, n, N, s, S and more.
+<p>重复点号('.')也是支持的， 用于重复指定次数的命令和移动。寄存器也是支持的，有宏命令和书签。许多其它混合命令也支持，比如*, /, n, N, s, S 等等。
 
-<h2>What's Not</h2>
+<h2>哪些没有</h2>
 
-<p>Insert mode is regular Sublime Text editing, with the usual Sublime Text key bindings: vi insert mode key bindings are not emulated.
+<p>插入模式时常规的Sublime Text编辑模式，绑定的是Sublime Text常用的快捷键：并没有模仿vi 插入模式的键盘绑定。
 
-<p>Ex commands are not implemented, apart from :w and :e, which work via the command palette.
+<p>通过via命令面板执行的Ex commands没有实现，除了:w和:e。
 
 <h2>Under the Hood</h2>
 
-<p>Vintage mode is implemented entirely via key bindings and the plugin API - feel free to browse through the Vintage package and see how it's put together. As an example, if you'd like to bind "jj" to exit insert mode, you can add this key binding:
+<p>Vintage模式完全是参考via键盘绑定和基于插件API来实现的——你可以自由的浏览Vintage包，看看它们是如何组合在一起的。举个例子，如果你要把 "jj" 绑定为退出插入模式，你可以像下面这样天剑键盘绑定：
 
 <pre class="code">
 { "keys": ["j", "j"], "command": "exit_insert_mode",
@@ -76,7 +76,7 @@ Vintage默认是禁用的， 通过<span class="setting">ignored_packages</span>
 
 <h2>OS X Lion</h2>
 
-<p>In Lion, holding down a key won't repeat it, but will instead show a popup menu to select between character variations. This doesn't work well with command mode, so you may want to disable it. This can be done via entering this at the terminal:
+<p>Lion系统下，按住某个键不会重复，但是会弹出一个菜单选择字符变更。在命令模式下这样并不是很好，如果你想禁用它，可以通过在终端里输入下面这个语句：
 
 <pre class="code">
 defaults write com.sublimetext.2 ApplePressAndHoldEnabled -bool false
@@ -84,7 +84,7 @@ defaults write com.sublimetext.2 ApplePressAndHoldEnabled -bool false
 
 <h2>Ctrl Keys</h2>
 
-<p>Vintage supports these ctrl key bindings:
+<p>Vintage支持下面这些ctrl key的绑定:
 
 <ul>
 <li><span class="key">Ctrl+[</span>: Escape
@@ -95,7 +95,7 @@ defaults write com.sublimetext.2 ApplePressAndHoldEnabled -bool false
 <li><span class="key">Ctrl+B</span>: Page Up
 </ul>
 
-However, because they conflict with other Sublime Text key bindings, these are disabled by default on Windows and Linux. They can be enabled with the vintage_ctrl_keys setting:
+不过，因为这些会与Sublime Text的其它键盘绑定冲突，Windows和Linux下默认是禁用的。可以通过vintage_ctrl_keys来配置:
 
 <pre class="code">
     "vintage_ctrl_keys": true
@@ -103,7 +103,7 @@ However, because they conflict with other Sublime Text key bindings, these are d
 
 <h2>Ex Mode</h2>
 
-<p>Please take a look at <a href="https://github.com/SublimeText/VintageEx">VintageEx</a> for an Ex mode for Vintage
+<p>可以参考<a href="https://github.com/SublimeText/VintageEx">VintageEx</a>这里查看Vintage的Ex mode。
 
 </body>
 </html>
