@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>Projects - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">目录</a></p>
+<h1>Projects(项目)</h1>
+<h3>概述</h3>
+
+<p>Projects在Sublime Text中由2个文件组成：sublime-project文件，包含项目的定义，和sublime-workspace文件，包含用户特定数据，比如打开的文件和每个文件的修改。
+
+<p>按照一般原则，sublime-project需要纳入版本控制，而sublime-workspace文件不需要。
+
+<h2>Project Format</h2>
+
+<p>sublime-project文件是JSON格式，支持三个一级配置节点: <span class="setting">folders</span>, 包含引入的文件目录，<span class="setting">settings</span>, 包含需要重写的file-setting, 以及<span class="setting">build_systems</span>, 指定项目的构建系统。下面是一个例子：
+
+<pre class="code">
+{
+    "folders":
+    [
+        {
+            "path": "src",
+            "folder_exclude_patterns": ["backup"],
+            "follow_symlinks": true
+        },
+        {
+            "path": "docs",
+            "name": "Documentation",
+            "file_exclude_patterns": ["*.css"]
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 8
+    },
+    "build_systems":
+    [
+        {
+            "name": "List",
+            "shell_cmd": "ls -l"
+        }
+    ]
+}
+</pre>
+
+<h3>Folders</h3>
+
+<p>每个文件夹都需要有一个path(路径), 和其它可选配置file_exclude_patterns, file_include_patterns, folder_exclude_patterns, folder_include_patterns and follow_symlinks。路径是相对于project目录的位置，或者完整绝对路径。Folders也可以指定一个name配置，用于显示在侧边栏里。
+
+<p>如果从老版本的项目转换过来可能会在<span class="setting">folders</span>下有一个<span class="setting">mount_points</span>。 如果还想使用这个移除的模式，需要转换成上面这种格式。
+
+<h3>Settings</h3>
+
+<p><a href="settings.html">配置(Settings)</a>可以在这回使用<span class="setting">settings</span>这个key值来指定， 可以覆盖用户配置规则(user settings)。注意它不会覆盖特定的语法配置(syntax specific settings)。
+
+<h3>构建系统(Build Systems)</h3>
+
+<p>Build Systems指定了一组内联的<a href="http://sublimetext.info/docs/en/reference/build_systems.html">构建系统</a>定义. 除了一般的构建系统的配置，还需要为每个构建系统指定一个<span class="setting">name</span>。可用的构建系统列举在<span class="menu">Tools/Build Systems</span>菜单下。
+
+</body>
+</html>
