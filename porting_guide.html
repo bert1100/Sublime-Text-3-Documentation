@@ -29,11 +29,11 @@
 
 <h3>Out of Process Plugins</h3>
 
-<p>插件现在运行在一个独立的进行，<tt>plugin_host</tt>。从插件作者的角度来看没什么区别，除了plugin host崩溃不再会使主程序挂掉之外。</p>
+<p>插件现在运行在一个独立的进程，<tt>plugin_host</tt>。从插件作者的角度来看没什么区别，除了plugin host崩溃不再会使主程序挂掉之外。</p>
 
 <h3>匿名事件</h3>
 
-<p>在Sublime Text 2中仅有set_timeout方法时线程安全的。在Sublime Text 3中，每个API方法都是线程安全的。另外，还有匿名事件处理器，可以更容易编写不中断的代码：
+<p>在Sublime Text 2中仅有set_timeout方法是线程安全的。在Sublime Text 3中，每个API方法都是线程安全的。另外，还有匿名事件处理器，可以更容易编写不中断的代码：
 
 <ul>
     <li>on_modified_async</li>
