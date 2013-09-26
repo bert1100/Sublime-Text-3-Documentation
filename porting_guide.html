@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>迁移指南 - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">目录</a></p>
+<h1>迁移指南</h1>
+
+<h3>概述</h3>
+
+<p>Sublime Text 3在插件上与Sublime Text 2相比有很大的不同，大多数的插件至少都需要做少量的迁移工作。 有下面这些变化：</p>
+
+<ul>
+    <li>Python 3.3</li>
+    <li>Out of Process Plugins(进程插件)</li>
+    <li>Asynchronous Events(匿名事件)</li>
+    <li>受限制的begin_edit()和end_edit()</li>
+    <li>Zip压缩的Packages</li>
+    <li>Importing Modules(引入模块)</li>
+</ul>
+
+<h3>Python 3.3</h3>
+
+<p>Sublime Text 3使用Python 3.3，而Sublime Text 2使用的是Python 2.6。此外，OS X系统下，不在使用系统的Python构建工具，而使用Sublime Text自己的。Windows和Linux跟原来一样绑定到自己的版本。</p>
+
+<h3>Out of Process Plugins</h3>
+
+<p>插件现在运行在一个独立的进行，<tt>plugin_host</tt>。从插件作者的角度来看没什么区别，除了plugin host崩溃不再会使主程序挂掉之外。</p>
+
+<h3>匿名事件</h3>
+
+<p>在Sublime Text 2中仅有set_timeout方法时线程安全的。在Sublime Text 3中，每个API方法都是线程安全的。另外，还有匿名事件处理器，可以更容易编写不中断的代码：
+
+<ul>
+    <li>on_modified_async</li>
+    <li>on_selection_modified_async</li>
+    <li>on_pre_save_async</li>
+    <li>on_post_save_async</li>
+    <li>on_activated_async</li>
+    <li>on_deactivated_async</li>
+    <li>on_new_async</li>
+    <li>on_load_async</li>
+    <li>on_clone_async</li>
+    <li>set_timeout_async</li>
+</ul>
+
+<p>当编写线程代码时，需要注意在方法运行时缓冲区可能会随时改变。</p>
+
+<h3>受限制的begin_edit()和end_edit()</h3>
+
+<p>begin_end()和end_edit()不再是可以直接访问，除了在某些特定情况下。获取一个有效的编辑器对象的唯一方法是把你的代码放在TextCommand的一个子类里。通常，TextCommand中大部分代码可以放在begin_edit()和end_edit()之间进行重构，然后在这个TextCommand上调用run_command。</p>
+
+<p>这种方式可以消除空荡的Edit对象，并且确保重复命令和宏正常工作。</p>
+
+<h3>Zip压缩的包</h3>
+
+<p>Sublime Text 3中的Packages可以直接通过<tt>.sublime-package</tt>格式文件运行(其实就是<tt>.zip</tt>重命名的格式), 而Sublime Text 2是未zip压缩运行的。</p>
+
+<p>跟大多数改变相比这不会导致什么变化，重要的一点是，你要访问packgae中的文件时需要注意。</p>
+
+<h3>Importing Modules</h3>
+
+<p>引入其他插件在Sublime Text 3中会更加的简单和稳定,而且可以使用规整的引入声明，例如<tt>import Default.comment</tt>将会引入<tt>Packages/Default/Comment.py</tt></p>
+
+<h3>启动时API使用会受限制</h3>
+
+<p>由于<tt>plugin_host</tt>载入是异步的，在载入时Sublime Text的 API将不可用。这就意味着你的模块里所有top-level的声明都不能调用<tt>sublime</tt>模块的方法。在启动期间，API是休眠状态，将忽略所有调用请求。</p>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>恢复到新安装状态 - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">目录</a></p>
+<h1>恢复到新安装状态</h1>
+
+
+<h3>概述</h3>
+
+<p>Sublime Text可以通过移除data文件夹来恢复到初始安装状态。根据操作系统，这个文件夹的位置为：</p>
+
+<ul>
+    <li>OS X: <tt>~/Library/Application Support/Sublime Text 3</tt></li>
+    <li>Windows: <tt>%APPDATA%\Sublime Text 3</tt></li>
+    <li>Linux: <tt>~/.config/sublime-text-3</tt></li>
+</ul>
+
+<p>按下面操作恢复到初始安装状态：
+
+<ol>
+    <li>退出Sublime Text</li>
+    <li>删除上面列举的数据目录</li>
+    <li>启动Sublime Text</li>
+</ol>
+
+<p>当重新启动是，将会创建一个新的data文件夹，跟第一次运行Sublime Text时一样。注意，这也会移除你所有的settings和packages。</p>
+
+<h3>OS X Lion</h3>
+
+<p>在Lion系统里，~/Library文件夹默认是影藏的。可以在Finder里通过<span class="menu">Go/Go to Folder</span>菜单输入 ~/Library来浏览。
+
+<h3>Windows</h3>
+
+<p>在Windows下，缓存文件保存在单独的位置，<tt>%LOCALAPPDATA%\Sublime Text 3</tt></li>, 使用漫游数据文件(roaming profiles)来提高性能。
+
+</body>
+</html>

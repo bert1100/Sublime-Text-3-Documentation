@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" charset="utf-8" />
+<title>Packages包 - Sublime Text 3 文档</title>
+<link rel="stylesheet" type="text/css" href="sublime_docs.css">
+</head>
+<body>
+
+<p class="contents"><a href="index.html">Contents</a></p>
+
+<h1>Packages</h1>
+
+<h3>概述</h3>
+
+<p>Packages是Sublime Text的一组资源文件集合，用于：插件，预发高亮定义，菜单，代码片段等等。Sublime Text只附带几个包，更多的是用户创建的。</p>
+
+<p>Packages以<tt>.sublime-package</tt>文件格式保存，其实是<tt>zip</tt>格式，只不过用了另外一个后缀名称。Packages也可以以未压缩的目录保存，或者2中方式混合：包目录下的文件将会覆盖<tt>.sublime-package</tt>格式压缩包中的文件。
+
+<h3>目录位置</h3>
+
+<p>zip压缩的包放在:
+
+<ul>
+    <li><tt>&lt;executable_path&gt;/Packages</tt></li>
+    <li><tt>&lt;data_path&gt;/Installed Packages</tt></li>
+</ul>
+
+<p>目录包可以放在:
+
+<ul>
+    <li><tt>&lt;data_path&gt;/Packages</tt></li>
+</ul>
+
+<p>例如，<tt>Python</tt>包放在<tt>&lt;executable_path&gt;/Packages/Python.sublime-package</tt>， 任何放在<tt>&lt;data_path&gt;/Packages/Python</tt>目录下的文件将会覆盖<tt>.sublime-package</tt>压缩包中的文件。
+
+<p>一般情况下，<tt>&lt;executable_path&gt;/Packages</tt>下放Sublime Text的自带包，<tt>&lt;data_path&gt;/Installed Packages</tt>下放第三方用户开发的包。
+
+<h3>特殊包</h3>
+
+<p>有2个特殊包: <tt>Default</tt>和<tt>User</tt>。<tt>Default</tt>优先顺序总是排在第一，<tt>User</tt>优先顺序总是排在最后。包的优先顺序会影响包之间的文件合并，比如<tt>Main.sublime-menu</tt>。任何包都可能会包含一个<tt>Main.sublime-menu</tt>文件, 但是却不会覆盖掉主菜单，而是根据包顺序把这个文件进行合并。
+
+<p><tt>Default</tt>和<tt>User</tt>之外的包按照字母顺序排序。
+
+<h3>创建一个新的包</h3>
+
+<p>要创建一个新的包，只需要简单的在<tt>&lt;data_path&gt;/Installed Packages</tt>目录下新建一个目录就可以了。可以通过<i>Preferences/Browse Packages</i>菜单打开这个目录。
+
+<h3>覆盖Zip包中的文件</h3>
+
+<p>在<tt>Packages/&lt;Package Name&gt;</tt>目录下建立一个相同名字的文件即可。</p>
+
+<p>例如要覆盖Sublime Text自带的<tt>Python.sublime-package</tt>包中的<tt>function.sublime-snippet</tt>文件，在<tt>&lt;data_path&gt;/Packages</tt>下创建<tt>Python</tt>目录，然后把自己的<tt>function.sublime-snippet</tt>文件放在改目录下即可。
+
+</body>
+</html>
