@@ -1086,17 +1086,17 @@ Window.run_command可以运行任何形式的命令，通过输入框来调度�
       <td class="mth">on_query_context(view, key, operator, operand, match_all)</td>
       <td class="rtn">bool or None</td>
       <td class="dsc">
-         Called when determining to trigger a key binding with the given context key. If the plugin knows how to respond to the context, it should return either True of False. If the context is unknown, it should return None.
-         <p><tt>operator</tt> is one of:
+         当指定的key触发键盘绑定时调用。如果该插件知道如何响应这个上下文，应该返回一个虚假的True，如果不识别该上下文则返回None。
+         <p><tt>operator</tt>可以是下面这些值：
          <ul>
-            <li><tt>sublime.OP_EQUAL</tt>. Is the value of the context equal to the operand?
-            <li><tt>sublime.OP_NOT_EQUAL</tt>. Is the value of the context not equal to the operand?
-            <li><tt>sublime.OP_REGEX_MATCH</tt>. Does the value of the context match the regex given in operand?
-            <li><tt>sublime.OP_NOT_REGEX_MATCH</tt>. Does the value of the context not match the regex given in operand?
-            <li><tt>sublime.OP_REGEX_CONTAINS</tt>. Does the value of the context contain a substring matching the regex given in operand?
-            <li><tt>sublime.OP_NOT_REGEX_CONTAINS</tt>. Does the value of the context not contain a substring matching the regex given in operand?
+            <li><tt>sublime.OP_EQUAL</tt>. 上下文是否与operand相等?
+            <li><tt>sublime.OP_NOT_EQUAL</tt>. 上下文是否与operand不相等?
+            <li><tt>sublime.OP_REGEX_MATCH</tt>. 上下文与operand指定的正则匹配?
+            <li><tt>sublime.OP_NOT_REGEX_MATCH</tt>. 上下文与operand指定的正则不匹配?
+            <li><tt>sublime.OP_REGEX_CONTAINS</tt>. 上下文包含与operand指定的正则相匹配的子字符串?
+            <li><tt>sublime.OP_NOT_REGEX_CONTAINS</tt>.上下文不包含与operand指定的正则相匹配的子字符串
          </ul>
-         <p><tt>match_all</tt> should be used if the context relates to the selections: does every selection have to match (match_all = True), or is at least one matching enough (match_all = Fals)?
+         <p><tt>match_all</tt> 当与选区相关时使用：是否所有的选区都要匹配(match_all = True), 还是只需要至少一个选区匹配(match_all = Fals)?
       </td>
 </table>
 <a name="sublime_plugin.ApplicationCommand"></a>
@@ -1125,7 +1125,7 @@ Window.run_command可以运行任何形式的命令，通过输入框来调度�
    <tr>
       <td class="mth">is_checked(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if a checkbox should be shown next to the menu item. The <tt>.sublime-menu</tt> file must have the checkbox attribute set to true for this to be used.</td>
+      <td class="dsc">如果需要在菜单项旁边显示checkbox则返回true。<tt>.sublime-menu</tt>文件必须要有checkbox属性，设置为true</td>
    <tr>
       <td class="mth">description(&lt;args&gt;)</td>
       <td class="rtn">String</td>
