@@ -897,15 +897,15 @@ Window.run_command可以运行任何形式的命令，通过输入框来调度�
    <tr>
       <td class="mth">create_output_panel(name)</td class="rtn">
       <td class="rtn">View</td>
-      <td class="dsc">Returns the view associated with the named output panel, created it if required. The output panel can be shown by running the <tt>show_panel</tt> window command, with the <tt>panel</tt> argument set to the name with an  "output." prefix.
+      <td class="dsc">返回输出面板相对应的view,如果需要则创建它。可以运行<tt>show_panel</tt>这个window命令来显示输出面板，<tt>panel</tt>参数设置为一个"output."前缀的name。
    <tr>
       <td class="mth">lookup_symbol_in_index(symbol)</td class="rtn">
       <td class="rtn">[Location]</td>
-      <td class="dsc">Returns all locations where the symbol is defined across files in the current project.</td>
+      <td class="dsc">返回所有定义的符号的位置，当前project下跨文件查找。</td>
    <tr>
       <td class="mth">lookup_symbol_in_open_files(symbol)</td class="rtn">
       <td class="rtn">[Location]</td>
-      <td class="dsc">Returns all locations where the symbol is defined across open files.</td>
+      <td class="dsc">同上功能相似，跨当前打开的文件查找</td>
       <!--
          <tr><td class="mth">hwnd()</td class="rtn"><td class="rtn">HWND</td><td class="dsc">Returns the win32 window handle for the window.</td>
          -->
