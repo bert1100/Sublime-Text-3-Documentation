@@ -391,7 +391,7 @@ view代表了text buffer(缓冲区)中的视图。注意，多个view可以引�
       <td class="mth">classify(point)</td class="rtn">
       <td class="rtn">int</td>
       <td class="dsc">
-         分类pt, 按位返回0个或多个下面这些标识符：
+         分类pt, 返回0个或多个下面这些标识符按位或的值：
          <ul>
             <li>CLASS_WORD_START
             <li>CLASS_WORD_END
@@ -407,15 +407,15 @@ view代表了text buffer(缓冲区)中的视图。注意，多个view可以引�
    <tr>
       <td class="mth">find_by_class(point, forward, classes, &lt;separators&gt;)</td class="rtn">
       <td class="rtn">Region</td>
-      <td class="dsc">Finds the next location after point that matches the given classes. If forward is False, searches backwards instead of forwards. classes is a bitwise OR of the sublime.CLASS_XXX flags. separators may be passed in, to define what characters should be considered to separate words.</td>
+      <td class="dsc">从point开始查找下一个匹配classes的位置。如果forward为False，则向后查找。classes是sublime.CLASS_XXX标识符按位或的值。separators可以传入，用于指定哪些字符应该被当成独立的单词。</td>
    <tr>
       <td class="mth">expand_by_class(point, classes, &lt;separators&gt;)</td class="rtn">
       <td class="rtn">Region</td>
-      <td class="dsc">Expands point to the left and right, until each side lands on a location that matches classes. classes is a bitwise OR of the sublime.CLASS_XXX flags. separators may be passed in, to define what characters should be considered to separate words.</td>
+      <td class="dsc">扩展point到左边和右边，直到两端匹配到classes的位置。classes是sublime.CLASS_XXX标识符按位或的值。separators可以传入，用于指定哪些字符应该被当成独立的单词。</td>
    <tr>
       <td class="mth">expand_by_class(region, classes, &lt;separators&gt;)</td class="rtn">
       <td class="rtn">Region</td>
-      <td class="dsc">Expands region to the left and right, until each side lands on a location that matches classes. classes is a bitwise OR of the sublime.CLASS_XXX flags. separators may be passed in, to define what characters should be considered to separate words.</td>
+      <td class="dsc">扩展region到左边和右边，其它参数意义同上。</td>
    <tr>
       <td class="mth">find(pattern, fromPosition, &lt;flags&gt;)</td class="rtn">
       <td class="rtn">Region</td>
@@ -518,7 +518,7 @@ view代表了text buffer(缓冲区)中的视图。注意，多个view可以引�
       <td class="rtn">None</td>
       <td class="dsc">
          往view里添加这一组区域(region)。如果region已经存在，会被覆盖。 scope参数决定region绘制的颜色，必须是scope名称，比如 "comment" 或者 "string"。如果没有scope参数，region不会被写入。<p>icon参数,如果有的话，每个region前面会绘制icon标记。图标的颜色跟scope参数有关。 icon名称可以是：<tt>dot<span style="font-family:微软雅黑, sans-serif;">、</span></tt><tt>circle</tt>,、<tt>bookmark<span style="font-family:微软雅黑, sans-serif;">,、</span></tt><tt>cross。</tt></p><p>可选参数flags可以是下列的组合：</p><ul><li><p><tt>sublime.DRAW_EMPTY</tt>. 用竖线绘制空白区域。默认根本不绘制。</p></li><li><p><tt>sublime.HIDE_ON_MINIMAP</tt>. 在minimap不显示这些区域。</p></li><li><p><tt>sublime.DRAW_EMPTY_AS_OVERWRITE</tt>. 用横线绘制空白区域。</p></li><li><p><tt>sublime.DRAW_OUTLINED</tt>. 绘制区域轮廓而不是填充。</p></li><li><p><tt>sublime.PERSISTENT</tt>. 保存区域到会话。</p></li><li><p><tt>sublime.HIDDEN</tt>. 不绘制区域。</p></li></ul>
-            <p>The underline styles are exclusive, either zero or one of them should be given. If using an underline, DRAW_NO_FILL and DRAW_NO_OUTLINE should generally be passed in.</p>
+            <p>下划线样式是唯一的，要么0个要么一个。如果使用underline，需要传入DRAW_NO_FILL和DRAW_NO_OUTLINE。</p>
         </td>
    <tr>
       <td class="mth">get_regions(key)</td class="rtn">
@@ -552,7 +552,7 @@ Index 为0 对应最近的一次command， -1对应倒数第二次的命令，�
    <tr>
       <td class="mth">change_count()</td class="rtn">
       <td class="rtn">int</td>
-      <td class="dsc">Returns the current change count. Each time the buffer is modified, the change count is incremented. The change count can be used to determine if the buffer has changed since the last it was inspected.</td>
+      <td class="dsc">返回当前修改的总次数。每次修改时，exclusive都会计数。修改计数可用于判断从上一次期望计数开始是否已经改变。</td>
    <tr>
       <td class="mth">fold([regions])</td class="rtn">
       <td class="rtn">bool</td>
@@ -588,33 +588,33 @@ Index 为0 对应最近的一次command， -1对应倒数第二次的命令，�
    <tr>
       <td class="mth">overwrite_status()</td class="rtn">
       <td class="rtn">Bool</td>
-      <td class="dsc">Returns the overwrite status, which the user normally toggles via the insert key.</td>
+      <td class="dsc">返回覆写状态，通常用户通过insert键来切换。</td>
    <tr>
       <td class="mth">set_overwrite_status(enabled)</td class="rtn">
       <td class="rtn">None</td>
-      <td class="dsc">Sets the overwrite status.</td>
+      <td class="dsc">设置覆写状态</td>
    <tr>
       <td class="mth">symbols(line_endings)</td class="rtn">
       <td class="rtn">[(Region, String)]</td>
-      <td class="dsc">Extract all the symbols defined in the buffer.</td>
+      <td class="dsc">提取所有缓冲区中定义的符号</td>
    <tr>
       <td class="mth">show_popup_menu(items, on_done, &lt;flags&gt;)</td class="rtn">
       <td class="rtn">None</td>
       <td class="dsc">
-         Shows a pop up menu at the caret, to select an item in a list. on_done will be called once, with the index of the selected item. If the pop up menu was cancelled, on_done will be called with an argument of -1.
-         <p>Items is an array of strings.</p>
-         <p>Flags currently only has no option.</p>
+         在光标位置显示一个弹出菜单，用于选择一个列表中的元素。 on_done会调用一次，传入选择项的索引。如果弹出菜单被取消，on_done调用的时候会传入-1参数。
+         <p>Items是一个字符串数组</p>
+         <p>Flags目前没有选项</p>
       </td>
    </tr>
 </table>
 <a name="sublime.Selection"></a>
-<h2>Class sublime.Selection</h2>
-Maintains a set of Regions, ensuring that none overlap. The regions are kept in sorted order.
+<h2>sublime.Selection类</h2>
+维护一组区域(Regions), 确保它们没有重叠。regions按顺序持有。
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">clear()</td>
@@ -623,103 +623,106 @@ Maintains a set of Regions, ensuring that none overlap. The regions are kept in 
    <tr>
       <td class="mth">add(region)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Adds the given region. It will be merged with any intersecting regions already contained within the set.</td>
+      <td class="dsc">添加指定的region。会与已经存在的有交叉的regions合并。</td>
    <tr>
       <td class="mth">add_all(region_set)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Adds all regions in the given set.</td>
+      <td class="dsc">添加一组regions</td>
    <tr>
       <td class="mth">subtract(region)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Subtracts the region from all regions in the set.</td>
+      <td class="dsc">从所有的region中移除指定的region</td>
    <tr>
       <td class="mth">contains(region)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true iff the given region is a subset.</td>
+      <td class="dsc">如果指定的region是所有region的一个子集则返回true</td>
 </table>
 <a name="sublime.Region"></a>
-<h2>Class sublime.Region</h2>
-Represents an area of the buffer. Empty regions, where a == b are valid.
+<h2>sublime.Region类</h2>
+代表了buffer中的一块区域。空白区域可以相等(==)。
 <table class="functions">
    <tr>
-      <th>Constructors</th>
-      <th>Description</th>
+      <th>构造器</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">Region(a, b)</td>
-      <td class="dsc">Creates a Region with initial values a and b.</td>
+      <td class="dsc">指定a,b创建一块区域。</td>
 </table>
 <table class="functions">
    <tr>
-      <th>Properties</th>
-      <th>Type</th>
-      <th>Description</th>
+      <th>属性</th>
+      <th>类型</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">a</td>
       <td class="rtn">int</td>
-      <td class="dsc">The first end of the region.</td>
+      <td class="dsc">region区域的第一个结束位置。（译者注：结束位置是相对于整个文档的第一个开始字符而言。）</td>
    <tr>
       <td class="mth">b</td>
       <td class="rtn">int</td>
-      <td class="dsc">The second end of the region. May be less that a, in which case the region is a reversed one.</td>
+      <td class="dsc">region区域的第二个结束位置。b可能会比a小，这样的话就相当于一个反转的区域。</td>
    <tr>
       <td class="mth">xpos</td>
       <td class="rtn">int</td>
-      <td class="dsc">The target horizontal position of the region, or -1 if undefined. Effects behavior when pressing the up or down keys.</td>
+      <td class="dsc">改区域的目标水平位置(target horizontal position)，如果未定义为-1。该值会影响按up和down键时的行为。</td>
 </table>
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">begin()</td>
       <td class="rtn">int</td>
-      <td class="dsc">Returns the minimum of a and b.</td>
+      <td class="dsc">返回a,b中较小的值。</td>
    <tr>
       <td class="mth">end()</td>
       <td class="rtn">int</td>
-      <td class="dsc">Returns the maximum of a and b.</td>
+      <td class="dsc">返回a,b中较大的值。</td>
    <tr>
       <td class="mth">size()</td>
       <td class="rtn">int</td>
-      <td class="dsc">Returns the number of characters spanned by the region. Always >= 0.</td>
+      <td class="dsc">返回区域的字符总数。始终 >= 0。</td>
    <tr>
       <td class="mth">empty()</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true iff begin() == end().</td>
+      <td class="dsc">如果begin()==end()，返回True。</td>
    <tr>
       <td class="mth">cover(region)</td>
       <td class="rtn">Region</td>
-      <td class="dsc">Returns a Region spanning both this and the given regions.</td>
+      <td class="dsc">返回一个跨越当前region和指定region的一个新的区域。</td>
    <tr>
       <td class="mth">intersection(region)</td>
       <td class="rtn">Region</td>
-      <td class="dsc">Returns the set intersection of the two regions.</td>
+      <td class="dsc">返回当前region和指定region的交集</td>
    <tr>
       <td class="mth">intersects(region)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns True iff this == region or both include one or more positions in common.</td>
+      <td class="dsc">如果this==region或者当前region和指定region都包含了一个或多个同样的位置。（译者注：其实就是判断指定的region和当前的region是否有交集）
+</td>
    <tr>
       <td class="mth">contains(region)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns True iff the given region is a subset.</td>
+      <td class="dsc">如果指定的region是当前region的一个子集返回True。</td>
    <tr>
       <td class="mth">contains(point)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns True iff begin() &lt;= point &lt;= end().</td>
+      <td class="dsc">如果begin() <= point <= end()返回True。（译者注：point点在当前区域范围内）。
+
+</td>
 </table>
 <a name="sublime.Edit"></a>
 <h2>Class sublime.Edit</h2>
-<p>Edit objects have no functions, they exist to group buffer modifications.
-<p>Edit objects are passed to TextCommands, and are not user createable. Using an invalid Edit object, or an Edit object from a different view, will cause the functions that require them to fail.
+<p>Edit对象没有方法，它是用于对buffer的修改进行分组。
+<p>Edit对象会传给TextCommands, 用户不能创建该对象。使用一个非法的Edit对象，或者来自其它view的Edit对象，将会导致引入的方法调用失败。
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">(no methods)</td>
@@ -727,93 +730,104 @@ Represents an area of the buffer. Empty regions, where a == b are valid.
       <td class="dsc"></td>
 </table>
 <a name="sublime.Window"></a>
-<h2>Class sublime.Window</h2>
+<h2>sublime.Window类</h2>
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">id()</td>
       <td class="rtn">int</td>
-      <td class="dsc">Returns a number that uniquely identifies this window.</td>
+      <td class="dsc">返回window的ID.</td>
    <tr>
       <td class="mth">new_file()</td>
       <td class="rtn">View</td>
-      <td class="dsc">Creates a new file. The returned view will be empty, and its is_loaded method will return True.</td>
+      <td class="dsc">创建一个文件。返回一个空的view，view的is_loaded方法返回True。
+</td>
    <tr>
       <td class="mth">open_file(file_name, &lt;flags&gt;)</td>
       <td class="rtn">View</td>
       <td class="dsc">
-         Opens the named file, and returns the corresponding view. If the file is already opened, it will be brought to the front. Note that as file loading is asynchronous, operations on the returned view won't be possible until its is_loading() method returns False.
-         <p>The optional flags parameter is a bitwise combination of:
+         打开指定文件，并返回对应的view。如果文件已经被打开，会切换到当前当前视图。注意，文件载入是异步的，view的is_loading() 方法返回False前不能对文件进行操作。
+         <p>可选参数flags可以是下列的组合：
          <ul>
-            <li><tt>sublime.ENCODED_POSITION</tt>. Indicates the file_name should be searched for a <tt>:row</tt> or <tt>:row:col</tt> suffix
-            <li><tt>sublime.TRANSIENT</tt>. Open the file as a preview only: it won't have a tab assigned it until modified
+            <li><tt>sublime.ENCODED_POSITION</tt>. 在文件名后面加<tt>:row</tt> or <tt>:row:col</tt> 后缀指定打开后的位置
+            <li><tt>sublime.TRANSIENT</tt>. 只作预览打开文件：在修改前不会有文件tab分配
          </ul>
       </td>
    <tr>
       <td class="mth">find_open_file(file_name)</td>
       <td class="rtn">View</td>
-      <td class="dsc">Finds the named file in the list of open files, and returns the corresponding View, or None if no such file is open.</td>
+      <td class="dsc">在打开的文件列表中查找指定文件，并且返回对应的view,如果没有打开改文件则发挥None</td>
    <tr>
       <td class="mth">active_view()</td>
       <td class="rtn">View</td>
-      <td class="dsc">Returns the currently edited view.</td>
+      <td class="dsc">返回当前正在编辑的view。</td>
    <tr>
       <td class="mth">active_view_in_group(group)</td>
       <td class="rtn">View</td>
-      <td class="dsc">Returns the currently edited view in the given group.</td>
+      <td class="dsc">返回指定组里正在编辑的view。
+</td>
    <tr>
       <td class="mth">views()</td>
       <td class="rtn">[View]</td>
-      <td class="dsc">Returns all open views in the window.</td>
+      <td class="dsc">返回window中所有打开的view。
+</td>
    <tr>
       <td class="mth">views_in_group(group)</td>
       <td class="rtn">[View]</td>
-      <td class="dsc">Returns all open views in the given group.</td>
+      <td class="dsc">返回指定组里的所有view。
+</td>
    <tr>
       <td class="mth">num_groups()</td>
       <td class="rtn">int</td>
-      <td class="dsc">Returns the number of view groups in the window.</td>
+      <td class="dsc">返回window中打开的view分组的总数。
+</td>
    <tr>
       <td class="mth">active_group()</td>
       <td class="rtn">int</td>
-      <td class="dsc">Returns the index of the currently selected group.</td>
+      <td class="dsc">返回当前选中组的索引。
+</td>
    <tr>
       <td class="mth">focus_group(group)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Makes the given group active.</td>
+      <td class="dsc">激活指定分组。
+</td>
    <tr>
       <td class="mth">focus_view(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Switches to the given view.</td>
+      <td class="dsc">切换到指定view。
+</td>
    <tr>
       <td class="mth">get_view_index(view)</td>
       <td class="rtn">(group, index)</td>
-      <td class="dsc">Returns the group, and index within the group of the view. Returns -1 if not found.</td>
+      <td class="dsc">返回view的分组，和在分组里的索引。如果没有返回-1。
+</td>
    <tr>
       <td class="mth">set_view_index(view, group, index)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Moves the view to the given group and index.</td>
+      <td class="dsc">把view移动到指定分组和指定的索引位置。
+</td>
    <tr>
       <td class="mth">folders()</td>
       <td class="rtn">[String]</td>
-      <td class="dsc">Returns a list of the currently open folders.</td>
+      <td class="dsc">返回当前打开的文件夹列表。（译者注：sublime左侧显示的folders列表的每个跟目录）。
+</td>
    <tr>
       <td class="mth">project_file_name()</td>
       <td class="rtn">String</td>
-      <td class="dsc">Returns name of the currently opened project file, if any.</td>
+      <td class="dsc">如果有，则返回当前打开的project文件名</td>
    <tr>
       <td class="mth">project_data()</td class="rtn">
       <td class="rtn">Dictionary</td>
-      <td class="dsc">Returns the project data associated with the current window. The data is in the same format as the contents of a .sublime-project file.
+      <td class="dsc">返回当前window对应的project数据。内容跟.sublime-project文件的内容一致。
    <tr>
       <td class="mth">set_project_data(data)</td class="rtn">
       <td class="rtn">None</td>
       <td class="dsc">
-         Updates the project data associated with the current window. If the window is associated with a .sublime-project file, the project file will be updated on disk, otherwise the window will store the data internally.
+         更新当前window对应的project数据。如果window有对应的.sublime-project文件，将会更新project文件， 同事window也会在内部保存这些数据。
          <!--
             <tr><td class="mth">activeViewInGroup(groupIdx)</td><td class="rtn">View</td><td class="dsc">Returns the active view in the given group.</td>
             <tr><td class="mth">views()</td><td class="rtn">[View]</td><td class="dsc">Returns a list of all the views in the current window.</td>
@@ -825,7 +839,8 @@ Represents an area of the buffer. Empty regions, where a == b are valid.
    <tr>
       <td class="mth">run_command(string, &lt;args&gt;)</td class="rtn">
       <td class="rtn">None</td>
-      <td class="dsc">Runs the named Command with the (optional) given arguments. Window.run_command is able to run both any sort of command, dispatching the command via input focus.</td>
+      <td class="dsc">运行WindowCommand，传入指定参数。
+Window.run_command可以运行任何形式的命令，通过输入框来调度命令</td>
       <!--
          <tr><td class="mth">canRunCommand(string, &lt;args&gt;)</td class="rtn"><td class="rtn">None</td><td class="dsc">Returns True iff the command is enabled with the (optional) given arguments</td>
          <tr><td class="mth">isFullScreen()</td class="rtn"><td class="rtn">bool</td><td class="dsc">Returns true of the Window is currently in full screen mode.</td>
@@ -870,15 +885,15 @@ Represents an area of the buffer. Empty regions, where a == b are valid.
       <td class="mth">show_quick_panel(items, on_done, &lt;flags&gt;, &lt;selected_index&gt;, &lt;on_highlighted&gt;)</td class="rtn">
       <td class="rtn">None</td>
       <td class="dsc">
-         Shows a quick panel, to select an item in a list. on_done will be called once, with the index of the selected item. If the quick panel was cancelled, on_done will be called with an argument of -1.
-         <p>Items may be an array of strings, or an array of string arrays. In the latter case, each entry in the quick panel will show multiple rows.
-         <p>Flags currently only has one option, <tt>sublime.MONOSPACE_FONT</tt>
-         <p>on_highlighted, if given, will be called every time the highlighted item in the quick panel is changed.
+         显示一个快速面板，用于选择一个列表中的元素。 on_done会调用一次，传入选择项的索引。如果弹出菜单被取消，on_done调用的时候会传入-1参数。.
+         <p>Items是一个字符串数组,或者一个字符串数组的二维数组，后者则会在快速面板的每一项显示成多行。
+         <p>Flags 目前只有一个选项<tt>sublime.MONOSPACE_FONT</tt>
+         <p>on_highlighted, 如果指定，每次快速面板上高亮的项变化时都会调用。
       </td>
    <tr>
       <td class="mth">show_input_panel(caption, initial_text, on_done, on_change, on_cancel)</td class="rtn">
       <td class="rtn">View</td>
-      <td class="dsc">Shows the input panel, to collect a line of input from the user. on_done and on_change, if not None, should both be functions that expect a single string argument. on_cancel should be a function that expects no arguments. The view used for the input widget is returned.</td>
+      <td class="dsc">显示输入面板，获取一行用户输入。on_done和on_change, 如果不为空的话，需要是接收一个参数的方法。on_cancel是一个不接受任何参数的方法。返回调用输入widget的view</td>
    <tr>
       <td class="mth">create_output_panel(name)</td class="rtn">
       <td class="rtn">View</td>
@@ -896,7 +911,7 @@ Represents an area of the buffer. Empty regions, where a == b are valid.
          -->
 </table>
 <a name="sublime.Settings"></a>
-<h2>Class sublime.Settings</h2>
+<h2>sublime.Settings类</h2>
 <table class="functions">
    <tr>
       <th>Methods</th>
