@@ -914,46 +914,54 @@ Window.run_command可以运行任何形式的命令，通过输入框来调度�
 <h2>sublime.Settings类</h2>
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">get(name)</td>
       <td class="rtn">value</td>
-      <td class="dsc">Returns the named setting.</td>
+      <td class="dsc">返回指定名称的设置。
+</td>
    <tr>
       <td class="mth">get(name, default)</td>
       <td class="rtn">value</td>
-      <td class="dsc">Returns the named setting, or default if it's not defined.</td>
+      <td class="dsc">返回指定名称的设置，如果没有定义该设置返回默认的。
+</td>
    <tr>
       <td class="mth">set(name, value)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Sets the named setting. Only primitive types, lists, and dictionaries are accepted.</td>
+      <td class="dsc">设置某个名称的配置，只能接受原类型，列表， lists，字典。
+</td>
    <tr>
       <td class="mth">erase(name)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Removes the named setting. Does not remove it from any parent Settings.</td>
+      <td class="dsc">移除某个配置。如果是继承自父配置不会被删除。
+</td>
    <tr>
       <td class="mth">has(name)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true iff the named option exists in this set of Settings or one of its parents.</td>
+      <td class="dsc">判断当前配置类中是否存在某个配置或者父配置中是否存在。
+</td>
    <tr>
       <td class="mth">add_on_change(key, on_change)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Register a callback to be run whenever a setting in this object is changed.</td>
+      <td class="dsc">注册当前配置对象的change的回调。只要有一个配置发生变化都会被回调。.
+</td>
    <tr>
       <td class="mth">clear_on_change(key)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Remove all callbacks registered with the given key.</td>
+      <td class="dsc">移除指定的change回调。
+
+</td>
 </table>
 <a name="sublime_plugin"></a>
 <h2>Module sublime_plugin</h2>
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">(no methods)</td>
@@ -962,109 +970,114 @@ Window.run_command可以运行任何形式的命令，通过输入框来调度�
 </table>
 <a name="sublime_plugin.EventListener"></a>
 <h2>Class sublime_plugin.EventListener</h2>
-Note that many of these events are triggered by the buffer underlying the view, and thus the method is only called once, with the first view as the parameter.
+注意，有许多事件是view下的buffer缓冲区触发的，而且这些方法只调用一次， view作为第一个参数。
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">on_new(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a new buffer is created.</td>
+      <td class="dsc">当创建一个新的buffer时触发。
+</td>
    <tr>
       <td class="mth">on_new_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a new buffer is created. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同上，运行在一个独立的线程上，这样就不中断主应用。</td>
    <tr>
       <td class="mth">on_clone(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view is cloned from an existing one.</td>
+      <td class="dsc">当从一个已存在的view复制一份时触发。
+</td>
    <tr>
       <td class="mth">on_clone_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view is cloned from an existing one. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_load(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when the file is finished loading.</td>
+      <td class="dsc">当文件载入完成时触发。
+</td>
    <tr>
       <td class="mth">on_load_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when the file is finished loading. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_pre_close(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view is about to be closed. The view will still be in the window at this point.</td>
+      <td class="dsc">在一个view关闭前触发。</td>
    <tr>
       <td class="mth">on_close(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view is closed (note, there may still be other views into the same buffer).</td>
+      <td class="dsc">在一个view关闭时触发 (注意，同一个缓冲区还可能有其它view)。</td>
    <tr>
       <td class="mth">on_pre_save(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called just before a view is saved.</td>
+      <td class="dsc">在一个view保存前触发。</td>
    <tr>
       <td class="mth">on_pre_save_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called just before a view is saved. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_post_save(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after a view has been saved.</td>
+      <td class="dsc">在一个view保存后触发。</td>
    <tr>
       <td class="mth">on_post_save_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after a view has been saved. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_modified(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after changes have been made to a view.</td>
+      <td class="dsc">view被修改后触发。
+</td>
    <tr>
       <td class="mth">on_modified_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after changes have been made to a view. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_selection_modified(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after the selection has been modified in a view.</td>
+      <td class="dsc">view里的选区变化时触发。
+</td>
    <tr>
       <td class="mth">on_selection_modified_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after the selection has been modified in a view. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_activated(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view gains input focus.</td>
+      <td class="dsc">一个view被激活时触发。</td>
    <tr>
       <td class="mth">on_activated_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view gains input focus. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_deactivated(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view loses input focus.</td>
+      <td class="dsc">一个view被隐藏时触发（被切换到后台）。</td>
    <tr>
       <td class="mth">on_deactivated_async(view)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when a view loses input focus. Runs in a separate thread, and does not block the application.</td>
+      <td class="dsc">同on_new_async原理</td>
    <tr>
       <td class="mth">on_text_command(view, command_name, args)</td>
       <td class="rtn">(new_command_name, new_args)</td>
-      <td class="dsc">Called when a text command is issued. The listener may return a (command, arguments) tuple to rewrite the command, or None to run the command unmodified.</td>
+      <td class="dsc">当一个text command触发时调用。监听者需要返回一个元祖(command, arguments) 用于重写这个command，或者不做任何修改时返回None。</td>
    <tr>
       <td class="mth">on_window_command(window, command_name, args)</td>
       <td class="rtn">(new_command_name, new_args)</td>
-      <td class="dsc">Called when a window command is issued. The listener may return a (command, arguments) tuple to rewrite the command, or None to run the command unmodified.</td>
+      <td class="dsc">当一个window command触发时调用。用法同上</td>
    <tr>
       <td class="mth">post_text_command(view, command_name, args)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after a text command has been executed.</td>
+      <td class="dsc">当一个text command执行之后调用。</td>
    <tr>
       <td class="mth">post_window_command(window, command_name, args)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called after a window command has been executed.</td>
+      <td class="dsc">当一个window command执行之后调用。</td>
       <!--
          <tr><td class="mth">onProjectLoad(window)</td><td class="rtn">None</td><td class="dsc">Called after a project has been loaded.</td>
          <tr><td class="mth">onProjectClose(window)</td><td class="rtn">None</td><td class="dsc">Called after a project has been closed.</td>
@@ -1087,25 +1100,28 @@ Note that many of these events are triggered by the buffer underlying the view, 
       </td>
 </table>
 <a name="sublime_plugin.ApplicationCommand"></a>
-<h2>Class sublime_plugin.ApplicationCommand</h2>
+<h2>sublime_plugin.ApplicationCommand类</h2>
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">run(&lt;args&gt;)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when the command is run.</td>
+      <td class="dsc">当command运行时执行。
+</td>
    <tr>
       <td class="mth">is_enabled(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if the command is able to be run at this time. The default implementation simply always returns True.</td>
+      <td class="dsc">如果command在当前时间可运行返回True。 默认实现都返回Flase。
+</td>
    <tr>
       <td class="mth">is_visible(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if the command should be shown in the menu at this time. The default implementation always returns True.</td>
+      <td class="dsc">如果command在当前可显示在菜单。默认实现都返回False。
+</td>
    <tr>
       <td class="mth">is_checked(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
@@ -1113,59 +1129,69 @@ Note that many of these events are triggered by the buffer underlying the view, 
    <tr>
       <td class="mth">description(&lt;args&gt;)</td>
       <td class="rtn">String</td>
-      <td class="dsc">Returns a description of the command with the given arguments. Used in the menu, if no caption is provided. Return None to get the default description.</td>
+      <td class="dsc">返回command的描述。在菜单中使用，如果没有标题的情况下。返回None获取默认描述。
+
+</td>
 </table>
 <a name="sublime_plugin.WindowCommand"></a>
-<h2>Class sublime_plugin.WindowCommand</h2>
-WindowCommands are instantiated once per window. The Window object may be retrieved via <tt>self.window</tt>
+<h2>sublime_plugin.WindowCommand类</h2>
+WindowCommands 每个window只初始化一次。Window对象可以通过<tt>self.window</tt>来引用。
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">run(&lt;args&gt;)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when the command is run.</td>
+      <td class="dsc">command运行时调用。
+</td>
    <tr>
       <td class="mth">is_enabled(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if the command is able to be run at this time. The default implementation simply always returns True.</td>
+      <td class="dsc">如果command在当前时间可运行返回True。 默认实现都返回Flase。
+</td>
    <tr>
       <td class="mth">is_visible(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if the command should be shown in the menu at this time. The default implementation always returns True.</td>
+      <td class="dsc">如果command在当前可显示在菜单。默认实现都返回False。
+</td>
    <tr>
       <td class="mth">description(&lt;args&gt;)</td>
       <td class="rtn">String</td>
-      <td class="dsc">Returns a description of the command with the given arguments. Used in the menu, if no caption is provided. Return None to get the default description.</td>
+      <td class="dsc">返回command的描述。在菜单中使用，如果没有标题的情况下。返回None获取默认描述。
+
+</td>
 </table>
 <a name="sublime_plugin.TextCommand"></a>
-<h2>Class sublime_plugin.TextCommand</h2>
-TextCommands are instantiated once per view. The View object may be retrieved via <tt>self.view</tt>
+<h2>sublime_plugin.TextCommand类</h2>
+TextCommands每个view只初始化一次。可以通过<tt>self.view</tt>放访问当前view。
 <table class="functions">
    <tr>
-      <th>Methods</th>
-      <th>Return Value</th>
-      <th>Description</th>
+      <th>方法</th>
+      <th>返回值</th>
+      <th>描述</th>
    </tr>
    <tr>
       <td class="mth">run(edit, &lt;args&gt;)</td>
       <td class="rtn">None</td>
-      <td class="dsc">Called when the command is run.</td>
+      <td class="dsc">command运行时调用。
+</td>
    <tr>
       <td class="mth">is_enabled(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if the command is able to be run at this time. The default implementation simply always returns True.</td>
+      <td class="dsc">如果command在当前时间可运行返回True。 默认实现都返回Flase。</td>
    <tr>
       <td class="mth">is_visible(&lt;args&gt;)</td>
       <td class="rtn">bool</td>
-      <td class="dsc">Returns true if the command should be shown in the menu at this time. The default implementation always returns True.</td>
+      <td class="dsc">如果command在当前可显示在菜单。默认实现都返回False。
+
+</td>
    <tr>
       <td class="mth">description(&lt;args&gt;)</td>
       <td class="rtn">String</td>
-      <td class="dsc">Returns a description of the command with the given arguments. Used in the menus, and for Undo / Redo descriptions. Return None to get the default description.</td>
+      <td class="dsc">返回command的描述。在菜单中使用，如果没有标题的情况下。返回None获取默认描述。</td>
 </table>
 
 
